@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="register-form">
+      <input type="text" placeholder="Write your name" id="regName" />
+      <br />
+      <input type="text" placeholder="Write your password" id="regPs" />
+      <br />
+      <input type="submit" value="Register" />
+      <br /><br />
+    </form>
+    <form id="login-form">
+      <input type="text" placeholder="What is your name?" id="lgName" />
+      <br />
+      <input type="text" placeholder="What is your password?" id="lgPs" />
+      <br />
+      <input type="submit" value="Login" />
+    </form>
+    <h1 id="greeting"></h1>
+    <script>
+      const register = document.querySelector("#register-form");
+      const login = document.querySelector("#login-form");
+
+      const USERNAME_KEY = "username";
+      const PASSWARD_KEY = "passward";
+
+      function onReginsterSubmit(event) {
+        event.preventDefault();
+        const username = document.querySelector("#regName").value;
+        const passward = document.querySelector("#regPs").value;
+        // console.log(username, passward);//확인하기
+        if(username !== "" & passward !== "") {
+            localStorage.setItem(USERNAME_KEY, username);//아이디와 패스워드에
+            localStorage.setItem(PASSWARD_KEY, passward);//공백이 있을때
+        }
+      }
+
+      function onLoginSubmit(event) {
+        event.preventDefault();
+        const username = document.querySelector("#lgName").value;
+        const passward = document.querySelector("#lgPs").value;
+        // console.log(username, passward);//확인하기
+        // console.log(localStorage.getItem(USERNAME_KEY));//localStorage getitem 해서 가져오는법
+        // if(localStorage.getItem(USERNAME_KEY) == username && localStorage.getItem(PASSWARD_KEY) == passward){
+        //     console.log("로그인!");
+        // }
+        // else{
+        //     console.log("로그인 실패!");
+        // }
+        localStorage.getItem(USERNAME_KEY);
+        if(
+            (username === localStorage.getItem(USERNAME_KEY)) &
+            (passward === localStorage.getItem(PASSWARD_KEY))
+        ) {
+            greeting.innerText = `Hello ${username}`;
+        } else {
+            greeting.innerText = `Wrong name/passward!`;
+        }
+      }
+
+      register.addEventListener("submit", onReginsterSubmit);
+      login.addEventListener("submit", onLoginSubmit);
+    </script>
+  </body>
+</html>
